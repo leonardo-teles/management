@@ -10,6 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "projects")
@@ -20,23 +24,31 @@ public class Project {
 	private Long id;
 
 	@Column(name = "project_name")
+	@NotBlank(message = "Project Name is Required")
 	private String projectName;
 
-	@Column(name = "project_identifier")
+	@NotBlank(message = "Project Identifier is Required")
+	@Column(name = "project_identifier", updatable = false, unique = true)
+	@Size(min = 4, max = 5, message = "Please Use {min} to {max} Characters")
 	private String projectIdentifier;
 
+	@NotBlank(message = "Project Description is Required")
 	private String description;
 
 	@Column(name = "start_date")
+	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date startDate;
 
 	@Column(name = "end_date")
+	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date endDate;
 
 	@Column(name = "created_at")
+	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date createdAt;
 
 	@Column(name = "updated_at")
+	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date updatedAt;
 
 	public Project() {}
