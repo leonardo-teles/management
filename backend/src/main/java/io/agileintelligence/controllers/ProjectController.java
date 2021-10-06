@@ -1,5 +1,7 @@
 package io.agileintelligence.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +45,10 @@ public class ProjectController {
 		Project project = projectService.findProjectByIdentifier(projectId);
 		
 		return new ResponseEntity<Project>(project, HttpStatus.OK);
+	}
+	
+	@GetMapping("/all")
+	public List<Project> getAllProjects() {
+		return projectService.findAllProjects();
 	}
 }

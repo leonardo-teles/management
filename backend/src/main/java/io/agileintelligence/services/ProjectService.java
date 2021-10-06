@@ -1,5 +1,7 @@
 package io.agileintelligence.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,6 @@ public class ProjectService {
 		}
 	}
 	
-	@SuppressWarnings("null")
 	public Project findProjectByIdentifier(String projectId) {
 		Project project = projectRepository.findByProjectIdentifier(projectId.toUpperCase()); 
 		
@@ -32,5 +33,9 @@ public class ProjectService {
 		}
 		
 		return project;
+	}
+	
+	public List<Project> findAllProjects() {
+		return projectRepository.findAll();
 	}
 }
